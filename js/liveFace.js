@@ -19,7 +19,7 @@ const uri = "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/mas
 
 // load webcam video
 startVideo = ()=>{
-  
+
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
   .then(function(stream) {
     video.srcObject = stream;
@@ -56,26 +56,25 @@ loadModel = async ()=>{
     video.addEventListener('canplay',  ()=>{
       // beep.play();
 
-      const canvas =  faceapi.createCanvasFromMedia(video)
-      document.getElementById("contentarea").append(canvas)
-      const outputSize = { width : video.width, height : video.height}
-      faceapi.matchDimensions(canvas, outputSize)
+      // const canvas =  faceapi.createCanvasFromMedia(video)
+      // document.getElementById("contentarea").append(canvas)
+      // const outputSize = { width : video.width, height : video.height}
+      // faceapi.matchDimensions(canvas, outputSize)
 
       setInterval(async ()=>{
           // detetcting number of faces and expressions of it
-          const heads = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
+          // const heads = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
 
           // detect face features
-          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors()
+          const detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
 
-          if (!detections.length){
+          if (!detection){
             return 0;
           }
 
-          detections.forEach((detection) =>{
 
-            const resizedDetections = faceapi.resizeResults(detection, outputSize)
-            canvas.getContext('2d').clearRect(0,0, canvas.width, canvas.height)
+            // const resizedDetections = faceapi.resizeResults(detection, outputSize)
+            // canvas.getContext('2d').clearRect(0,0, canvas.width, canvas.height)
 
             const bestMatch = faceMatcher.findBestMatch(detection.descriptor)
             // console.log(bestMatch)
@@ -83,25 +82,26 @@ loadModel = async ()=>{
             // draw rectangle
             // faceapi.draw.drawDetections(canvas, resizedDetections)
             if (bestMatch._label == "Neeh"){
-              var ctx = canvas.getContext('2d')
-              ctx.beginPath();
-              ctx.lineWidth = "3";
-              ctx.strokeStyle = "green";
-              ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
-              ctx.stroke();
+              // var ctx = canvas.getContext('2d')
+              // ctx.beginPath();
+              // ctx.lineWidth = "3";
+              // ctx.strokeStyle = "green";
+              // ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
+              // ctx.stroke();
+              document.getElementById("message").textContent = "Hi Neeh"
             }
             else{
-              var ctx = canvas.getContext('2d')
-              ctx.beginPath();
-              ctx.lineWidth = "3";
-              ctx.strokeStyle = "red";
-              ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
-              ctx.stroke();
+              // var ctx = canvas.getContext('2d')
+              // ctx.beginPath();
+              // ctx.lineWidth = "3";
+              // ctx.strokeStyle = "red";
+              // ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
+              // ctx.stroke();
             }
-          });
+
           
 
-      }, 100);
+      }, 250);
 
     });
 
@@ -114,7 +114,7 @@ Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri(uri),
   faceapi.nets.faceLandmark68Net.loadFromUri(uri),
   faceapi.nets.faceRecognitionNet.loadFromUri(uri),
-  faceapi.nets.faceExpressionNet.loadFromUri(uri),
+  // faceapi.nets.faceExpressionNet.loadFromUri(uri),
 ]).then(loadModel).catch("Model is not loaded yet");
 
 
