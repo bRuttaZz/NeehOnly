@@ -146,9 +146,7 @@ loadModel = async ()=>{
         clearInterval(intervel0);
         clearInterval(intervel1) ; 
       }
-      catch(e){
-        console.log("Okay not set");
-      }
+      catch(e){console.log("No intervel");}
       document.getElementById("tension").innerHTML = "";   
     }
     // stoping the intervel if needed

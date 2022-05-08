@@ -75,3 +75,6 @@ p2{
     font-weight: 1000;
     color: rgba(125,125,125,0.3);
 }
+b{
+    background-color: transparent;   
+}
