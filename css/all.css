@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     background-color: #45484d;
+    color: beige;
+    padding-top: 2vh;
 }
 
 
@@ -25,7 +27,7 @@
   /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 25vh auto; /* 15% from the top and centered */
     padding: 20px;
     /* border: 1px solid #888; */
     border : none;
@@ -56,7 +58,7 @@
       padding: 10px;
       padding-top: 5px;
       padding-bottom: 5px;
-      background-color: #a773ff;
+      background-color: #9d67fc;
       border: none;
       outline: none;
     font-weight: bold;
