@@ -4,6 +4,7 @@ var happyIndex = 0
 var faceMatcher = null
 
 const neeh = document.getElementById("neeh")
+const neeh2 = document.getElementById("neeh2")
 
 // loading audio element
 // var beep = new Audio("/static/images/beep.mp3");
@@ -12,7 +13,7 @@ const Neeh = document.getElementById("neeh")
 var faceMatcher = null
 
 const uri = "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/"
-const source = "https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/"
+// const source = "https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/"
 // load model
 
 
@@ -43,6 +44,13 @@ loadModel = async ()=>{
     const results = await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
     faceMatcher = new faceapi.FaceMatcher(results);
 
+    const labeledDescriptors = [
+      new faceapi.LabeledFaceDescriptors(
+        'Neeh',
+        [await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor(), await faceapi.detectSingleFace(neeh2, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()]
+      )
+    ]
+    
 
     // repeated checking when video start capturing
     video.addEventListener('canplay',  ()=>{
@@ -85,10 +93,7 @@ loadModel = async ()=>{
     });
 
 
-  }
-
-
-
+}
 
 
 
