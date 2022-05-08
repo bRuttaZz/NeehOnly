@@ -6,51 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="js/face-api.min.js"></script>
     <title>To Neeh</title>
+
     <style>
-        .contentarea{
-            margin: 0;
-            margin-left: 2vw;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: left;
-            align-items: left;
-        }
-        canvas{
-            position: absolute;
-            transform: rotateY(180deg);
-            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
-            -moz-transform:rotateY(180deg); /* Firefox */
-        }
-        .instruct{
-            margin-left: 10vw;
-            padding-top: 25vh;
-        }
-        video{
-            transform: rotateY(180deg);
-            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
-            -moz-transform:rotateY(180deg); /* Firefox */
-        }
+            #loader { 
+                border: 6px solid #f3f3f3; 
+                border-radius: 50%; 
+                border-top: 6px solid #444444; 
+                width: 40px; 
+                height: 40px; 
+                animation: spin 1s linear infinite; 
+                } 
+            @keyframes spin { 
+                100% { 
+                    transform: rotate(360deg); 
+                    } 
+                } 
+            .spinner_loader { 
+                position: absolute; 
+                top: 0; 
+                bottom: 0; 
+                left: 0; 
+                right: 0; 
+                margin: auto; 
+            } 
     </style>
+    <script > 
+        document.onreadystatechange = function() { 
+            if (document.readyState !== "complete") {
+                document.querySelector( 
+                "body").style.visibility = "hidden"; 
+                document.querySelector( 
+                "#loader").style.visibility = "visible"; 
+            }
+        }
+    </script>
+     
 </head>
-<body><center>
+<body>
+
+    <div class="spinner_loader" id = "loader"></div>
+    <center>
     <h1>Hi Dear</h1>
-</center>
+    </center>
     <div class="contentarea", id="contentarea">
         <div class="camera">
-            <video style="display: none;" id="video" height="720" width="560" autoplay muted >Video stream not available.</video><br>
+                <video style="display: none;" id="video" height="720" width="560" autoplay muted >Video stream not available.</video><br>
+        </div>
+        <img id="neeh" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh.png">
+        <img id="neeh2" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh2.png">
     </div>
-    <!-- <img id="neeh" src="neeh.png"> -->
-    <img id="neeh" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh.png">
-    <img id="neeh2" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh2.png">
 
-    <div>
-        <!-- <canvas id="demo"></canvas> -->
-    </div>
-    
+
     <p1 id="message"></p1>
-
     <script defer src="js/liveFace.js"></script>
 
 

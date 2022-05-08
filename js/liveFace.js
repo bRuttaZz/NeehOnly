@@ -35,12 +35,6 @@ loadModel = async ()=>{
     // get inference 
     console.log("models loaded");
 
-    // starting video
-    startVideo();
-
-    const results = await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
-    
-
     const n1 = await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
     const n2 = await faceapi.detectSingleFace(neeh2, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
     const labeledDescriptors = [
@@ -51,6 +45,14 @@ loadModel = async ()=>{
     ]
     
     faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
+
+    setTimeout(function(){
+      document.querySelector("#loader").style.display = "none"; 
+      document.querySelector( "body").style.visibility = "visible"; 
+    },200);
+
+    // starting video
+    startVideo();
 
     // repeated checking when video start capturing
     video.addEventListener('canplay',  ()=>{
