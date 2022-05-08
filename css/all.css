@@ -1,3 +1,13 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #45484d;
+}
+
+
+ 
+ 
  /* The Modal (background) */
  .allowCam {
     display: none; /* Hidden by default */
@@ -17,12 +27,15 @@
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    /* border: 1px solid #888; */
+    border : none;
+    width: 80vw; /* Could be more or less, depending on screen size */
+    border-radius: 15px;
   }
   
   /* The Close Button */
   .closeModal {
+    background-color: transparent;
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -31,7 +44,18 @@
   
   .closeModal:hover,
   .closeModal:focus {
-    color: black;
+    color: #e33e45;
     text-decoration: none;
     cursor: pointer;
   } 
+
+  .loadAgain{
+      border-radius: 5px;
+      padding: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      background-color: #a773ff;
+      border: none;
+      outline: none;
+
+  }
