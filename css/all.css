@@ -2,9 +2,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #45484d;
-    color: beige;
+    padding: 0.5vw;
     padding-top: 2vh;
+    /* background: #45484d; */
+    background-color: #45484d;
+    color: beige ;
 }
 
 
@@ -63,3 +65,13 @@
       outline: none;
     font-weight: bold;
   }
+p1{
+    background-color: transparent;
+}
+
+p2{
+    background-color: transparent;
+    font-size: 4rem;
+    font-weight: 1000;
+    color: rgba(125,125,125,0.3);
+}
