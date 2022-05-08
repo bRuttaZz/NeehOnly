@@ -43,7 +43,10 @@ loadModel = async ()=>{
         [n1.descriptor ,n2.descriptor ]
       )
     ]
-    
+
+    delete n1;
+    delete n2;
+
     faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
 
     setTimeout(function(){
@@ -74,35 +77,16 @@ loadModel = async ()=>{
             return 0;
           }
 
+            if (faceMatcher.findBestMatch(detection.descriptor)._label == "Neeh"){
 
-            // const resizedDetections = faceapi.resizeResults(detection, outputSize)
-            // canvas.getContext('2d').clearRect(0,0, canvas.width, canvas.height)
-
-            const bestMatch = faceMatcher.findBestMatch(detection.descriptor)
-            // console.log(bestMatch)
-
-            // draw rectangle
-            // faceapi.draw.drawDetections(canvas, resizedDetections)
-            if (bestMatch._label == "Neeh"){
-              // var ctx = canvas.getContext('2d')
-              // ctx.beginPath();
-              // ctx.lineWidth = "3";
-              // ctx.strokeStyle = "green";
-              // ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
-              // ctx.stroke();
               document.getElementById("message").textContent = "Hi Neeh"
+
             }
             else{
-              // var ctx = canvas.getContext('2d')
-              // ctx.beginPath();
-              // ctx.lineWidth = "3";
-              // ctx.strokeStyle = "red";
-              // ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
-              // ctx.stroke();
-            }
 
-          
-
+            }      
+          delete detection;
+           
       }, 250);
 
     });
