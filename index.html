@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="face-api.min.js"></script>
+    <title>To Neeh</title>
+    <style>
+        .contentarea{
+            margin: 0;
+            margin-left: 2vw;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+        }
+        canvas{
+            position: absolute;
+            transform: rotateY(180deg);
+            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+            -moz-transform:rotateY(180deg); /* Firefox */
+        }
+        .instruct{
+            margin-left: 10vw;
+            padding-top: 25vh;
+        }
+        video{
+            transform: rotateY(180deg);
+            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+            -moz-transform:rotateY(180deg); /* Firefox */
+        }
+    </style>
+</head>
+<body><center>
+    <h1>Hi Dear</h1>
+</center>
+    <div class="contentarea", id="contentarea">
+        <div class="camera">
+            <video id="video" height="720" width="560" autoplay muted >Video stream not available.</video><br>
+    </div>
+    <!-- <img id="neeh" src="neeh.png"> -->
+    <img id="neeh" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/colbaking/main/neeh.png">
+
+    <div>
+        <canvas id="demo"></canvas>
+    </div>
+    <a id="downloadAnchorElem" style="display:none"></a>
+
+    <script defer src="face_detector.js"></script>
+    <!-- <script defer src="liveFace.js"></script> -->
+
+
+
+
+
+
+</body>
+</html>
