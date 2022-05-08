@@ -15,3 +15,9 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 } 
+
+// function to be called when looking for neeh's face
+function lookForNeeh(){
+    document.getElementById("contentarea").style.display = "none";
+    document.getElementById("LookForHer").style.display = "block";
+}

@@ -22,8 +22,10 @@ startVideo = ()=>{
 
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
   .then(function(stream) {
+    window.localStream = stream;
     video.srcObject = stream;
     video.play();
+    lookForNeeh();
   })
   .catch(function(err) {
     modal.style.display = "block";
@@ -84,7 +86,8 @@ loadModel = async ()=>{
     // stoping the intervel if needed
     function stopIntrvl(){
       clearInterval(intervel);
-      video.pause();
+      localStream.getVideoTracks()[0].stop();
+      video.src = '';
     }
 
     });
