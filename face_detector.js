@@ -1,6 +1,7 @@
 const Neeh = document.getElementById("neeh")
 
 const uri = "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/"
+const source = "https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/"
 // load model
 
 loadModel = async ()=>{
@@ -19,12 +20,13 @@ loadModel = async ()=>{
     // dlAnchorElem.setAttribute("download", "neehFace.json");
     // dlAnchorElem.click();
 
-    fetch("neehFace.json")
-    .then(
-        response => {
-            console.log(response)
-        }
-    ).catch("Cant load data");
+    fetch(source+"neehFace.json")
+    .then(r => r.json())
+    .then(r => {
+        console.log(r);
+    }).catch(err =>{
+        console.log(err);
+    });
 
 }
 
