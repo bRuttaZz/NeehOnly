@@ -19,10 +19,7 @@ const uri = "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/mas
 
 // load webcam video
 startVideo = ()=>{
-  console.log("models loaded");
-
   
-
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
   .then(function(stream) {
     video.srcObject = stream;
@@ -42,15 +39,18 @@ loadModel = async ()=>{
     startVideo();
 
     const results = await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
-    faceMatcher = new faceapi.FaceMatcher(results);
+    
 
+    const n1 = await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
+    const n2 = await faceapi.detectSingleFace(neeh2, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
     const labeledDescriptors = [
       new faceapi.LabeledFaceDescriptors(
         'Neeh',
-        [await faceapi.detectSingleFace(neeh, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor(), await faceapi.detectSingleFace(neeh2, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()]
+        [n1.descriptor ,n2.descriptor ]
       )
     ]
     
+    faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
 
     // repeated checking when video start capturing
     video.addEventListener('canplay',  ()=>{
@@ -66,26 +66,39 @@ loadModel = async ()=>{
           const heads = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
 
           // detect face features
-          const detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors()
 
-          if (!detection){
+          if (!detections.length){
             return 0;
           }
 
-          const resizedDetections = faceapi.resizeResults(detection, outputSize)
-          canvas.getContext('2d').clearRect(0,0, canvas.width, canvas.height)
+          detections.forEach((detection) =>{
 
-          const bestMatch = faceMatcher.findBestMatch(detection.descriptor)
-          console.log(bestMatch.toString())
+            const resizedDetections = faceapi.resizeResults(detection, outputSize)
+            canvas.getContext('2d').clearRect(0,0, canvas.width, canvas.height)
 
-          // draw rectangle
-          // faceapi.draw.drawDetections(canvas, resizedDetections)
-          var ctx = canvas.getContext('2d')
-          ctx.beginPath();
-          ctx.lineWidth = "3";
-          ctx.strokeStyle = "green";
-          ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
-          ctx.stroke();
+            const bestMatch = faceMatcher.findBestMatch(detection.descriptor)
+            // console.log(bestMatch)
+
+            // draw rectangle
+            // faceapi.draw.drawDetections(canvas, resizedDetections)
+            if (bestMatch._label == "Neeh"){
+              var ctx = canvas.getContext('2d')
+              ctx.beginPath();
+              ctx.lineWidth = "3";
+              ctx.strokeStyle = "green";
+              ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
+              ctx.stroke();
+            }
+            else{
+              var ctx = canvas.getContext('2d')
+              ctx.beginPath();
+              ctx.lineWidth = "3";
+              ctx.strokeStyle = "red";
+              ctx.rect(resizedDetections.alignedRect._box._x, resizedDetections.alignedRect._box._y, resizedDetections.alignedRect._box._width, resizedDetections.alignedRect._box._height);
+              ctx.stroke();
+            }
+          });
           
 
       }, 100);
