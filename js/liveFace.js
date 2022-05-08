@@ -26,7 +26,8 @@ startVideo = ()=>{
     video.play();
   })
   .catch(function(err) {
-    console.log("An error occurred: " + err);
+    modal.style.display = "block";
+    
   });
 }
 
@@ -59,17 +60,8 @@ loadModel = async ()=>{
 
     // repeated checking when video start capturing
     video.addEventListener('canplay',  ()=>{
-      // beep.play();
 
-      // const canvas =  faceapi.createCanvasFromMedia(video)
-      // document.getElementById("contentarea").append(canvas)
-      // const outputSize = { width : video.width, height : video.height}
-      // faceapi.matchDimensions(canvas, outputSize)
-
-      setInterval(async ()=>{
-          // detetcting number of faces and expressions of it
-          // const heads = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
-
+      var intervel = setInterval(async ()=>{
           // detect face features
           const detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor()
 
@@ -77,17 +69,23 @@ loadModel = async ()=>{
             return 0;
           }
 
-            if (faceMatcher.findBestMatch(detection.descriptor)._label == "Neeh"){
+          if (faceMatcher.findBestMatch(detection.descriptor)._label == "Neeh"){
+  
+            document.getElementById("NeehMessage").style.display="block";
+            document.getElementById("contentarea").style.display = "none";
+            stopIntrvl();
+          }
+          else{
 
-              document.getElementById("message").textContent = "Hi Neeh"
-
-            }
-            else{
-
-            }      
-          delete detection;
-           
+          }      
+          delete detection;      
       }, 250);
+
+    // stoping the intervel if needed
+    function stopIntrvl(){
+      clearInterval(intervel);
+      video.pause();
+    }
 
     });
 
@@ -105,4 +103,8 @@ Promise.all([
 
 
 
-
+document.getElementById("loadAgain").addEventListener("click", ()=>{
+  console.log("clicked");
+  modal.style.display = "none";
+  startVideo();
+});

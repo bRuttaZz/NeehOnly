@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="js/face-api.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
     <title>To Neeh</title>
 
     <style>
@@ -45,22 +46,44 @@
 <body>
 
     <div class="spinner_loader" id = "loader"></div>
-    <center>
-    <h1>Hi Dear</h1>
-    </center>
+    
     <div class="contentarea", id="contentarea">
+        <center>
+            <h1>Allow Cam</h1>
+        </center>
         <div class="camera">
-                <video style="display: none;" id="video" height="720" width="560" autoplay muted >Video stream not available.</video><br>
+                <video  id="video" height="720" width="560" autoplay muted >Video stream not available.</video><br>
         </div>
         <img id="neeh" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh.png">
         <img id="neeh2" style="display :none;" crossOrigin="anonymous"  src="https://raw.githubusercontent.com/bRuttaZz/NeehOnly/main/neehs/neeh2.png">
     </div>
 
 
+<!-- the modal -->
+    <div class="allowCam" id="allowCam">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="closeModal" id="closeModal">&times;</span>
+              <p>Please Allow cam</p>
+              <br>
+              <br>
+              <button class="loadAgain" id="loadAgain">OK I understand</button>
+            </div>
+          
+    </div>
+<!-- no permission gonna get -->
+    <div id="noPermission" style="display: none;">
+        <h1>:(</h1>
+    </div>
+
     <p1 id="message"></p1>
+    <script src="js/pageFunctions.js"></script>
     <script defer src="js/liveFace.js"></script>
 
-
+<!-- found neeehhhh yeah whoo hhuuu-->
+    <div id="NeehMessage" class="NeehMessage" style="display: none;">
+        To dear dear dear Neeh.
+    </div>
 
 
 
